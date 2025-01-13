@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1F1F1F"
+    android:padding="16dp">
+
+    <!-- Top Bar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+
+        <!-- Back Arrow -->
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_back_arrow"
+            android:contentDescription="Back Arrow"
+            app:tint="#FFFFFF" />
+
+        <!-- Progress and Step Info -->
+        <TextView
+            android:id="@+id/stepInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="STEP 10 OF 24"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"/>
+    </RelativeLayout>
+
+    <!-- Progress Bar -->
+    <View
+        android:layout_width="109dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="6dp"
+        android:background="#3B82F6"/>
+
+    <!-- Question -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="HOW MANY PUSH-UPS COULD YOU DO?"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-black"/>
+
+    <!-- Option Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Option 1 -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="46dp"
+            android:text="LESS THAN 12"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2E2E2E"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp"/>
+
+        <!-- Option 2 -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:text="13 - 20"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2E2E2E"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp"/>
+
+        <!-- Option 3 -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="MORE THAN 21"
+            android:layout_marginTop="8dp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2E2E2E"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="I CON'T KNOW"
+            android:layout_marginTop="8dp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2E2E2E"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <!-- Continue Button -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="222dp"
+        android:text="CONTINUE"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#3B82F6"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="16sp"/>
+</LinearLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fitness Tracker</string>
+    <string name="map_api_key">AIzaSyA_xsZ8c-xqn4ZEXA1Kw22f2c_NDPO-078</string>
+    <string name="title_activity_map1">Map1</string>
+</resources>

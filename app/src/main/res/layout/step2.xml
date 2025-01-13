@@ -1,0 +1,137 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#373636"
+    tools:context=".GenderSelectionActivity">
+
+    <!-- Back Arrow -->
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitCenter"
+        />
+
+    <!-- Progress Bar -->
+
+    <!-- Step Indicator -->
+
+    <!-- Gender Options -->
+
+    <!-- Continue Button -->
+
+    <View
+        android:layout_width="29dp"
+        android:layout_height="4dp"
+        android:background="#3B82F6"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="66dp" />
+
+    <RadioGroup
+
+        android:id="@+id/genderOptions"
+        android:layout_width="410dp"
+        android:layout_height="663dp"
+        android:background="#222121"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="70dp" >
+
+        <!-- Question -->
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="Which gender do you associate you with?"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/maleOption"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#373636"
+            android:button="@null"
+            android:drawableEnd="@drawable/ic_male"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:text="Male"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+
+            />
+
+        <RadioButton
+            android:id="@+id/femaleOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#373636"
+            android:button="@null"
+            android:drawableEnd="@drawable/ic_female"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:text="Female"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/nonBinaryOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#373636"
+            android:button="@null"
+            android:drawableEnd="@drawable/ic_non_binary"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:text="Non-binary"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="#1E88E5"
+        android:text="Continue"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/stepIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:text="STEP 2 of 24"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="32dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
