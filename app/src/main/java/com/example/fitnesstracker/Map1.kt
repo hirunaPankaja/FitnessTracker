@@ -1,20 +1,26 @@
 package com.example.fitnesstracker
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.example.fitnesstracker.databinding.ActivityMap1Binding
 
 class Map1 : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMap1Binding
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
+    private lateinit var polylineOptions: PolylineOptions
+    private lateinit var currentPolyline: Polyline
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,27 +28,69 @@ class Map1 : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMap1Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val sriLanka = LatLng(7.8731, 80.7718)
+        mMap.addMarker(MarkerOptions().position(sriLanka).title("Marker in Sri Lanka"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sriLanka, 7.0f))
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                1
+            )
+            return
+        }
+        mMap.isMyLocationEnabled = true
+
+        // Initialize PolylineOptions and Polyline
+        polylineOptions = PolylineOptions().width(5f).color(android.graphics.Color.RED)
+        currentPolyline = mMap.addPolyline(polylineOptions)
+
+        // Create LocationRequest
+        val locationRequest = LocationRequest.create().apply {
+            interval = 5000 // Update interval in milliseconds
+            fastestInterval = 2000 // Fastest update interval in milliseconds
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+
+        // Create LocationCallback to handle location updates
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                locationResult ?: return
+                for (location in locationResult.locations) {
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    polylineOptions.add(currentLatLng)
+                    currentPolyline.points = polylineOptions.points
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15.0f))
+                }
+            }
+        }
+
+        // Start location updates
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // Stop location updates to save battery
+        fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 }

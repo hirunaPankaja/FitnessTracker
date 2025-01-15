@@ -27,20 +27,26 @@ android {
             )
         }
     }
+buildFeatures {
+    viewBinding = true
+}
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
 dependencies {
-    implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
+    implementation("com.mikhaellopez:circularprogressbar:3.1.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -49,10 +55,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-
-
 }

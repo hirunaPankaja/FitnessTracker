@@ -1,4 +1,4 @@
-package com.example.gym_workout;
+package com.example.fitnesstracker;
 
 
 import android.content.Context;

@@ -24,18 +24,18 @@ class Progress : AppCompatActivity(), SensorEventListener, LocationListener {
     private var stepDetector: Sensor? = null
     private var accelerometer: Sensor? = null
     private var gyroscope: Sensor? = null
-
     private var running = false
     private var totalSteps = 0f
     private var previousTotalSteps = 0f
     private var detectedSteps = 0
-
+    private var lastStepTime: Long = 0
     private lateinit var tvStepTaken: TextView
     private lateinit var stepProgressCircle: CircularProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_progress)
+        setContentView(R.layout.fragment_activity)
 
         tvStepTaken = findViewById(R.id.tv_stepTaken)
         stepProgressCircle = findViewById(R.id.stepProgressCircle)
@@ -45,6 +45,7 @@ class Progress : AppCompatActivity(), SensorEventListener, LocationListener {
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
         stepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         stepDetector = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
@@ -59,6 +60,7 @@ class Progress : AppCompatActivity(), SensorEventListener, LocationListener {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), 0)
             }
         }
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
         }
@@ -84,6 +86,16 @@ class Progress : AppCompatActivity(), SensorEventListener, LocationListener {
         locationManager.removeUpdates(this)
     }
 
+    private fun lowPass(input: FloatArray, output: FloatArray?): FloatArray {
+        val alpha = 0.8f
+        if (output == null) return input
+
+        for (i in input.indices) {
+            output[i] = output[i] + alpha * (input[i] - output[i])
+        }
+        return output
+    }
+
     override fun onSensorChanged(event: SensorEvent?) {
         if (event == null || !running) return
 
@@ -94,18 +106,27 @@ class Progress : AppCompatActivity(), SensorEventListener, LocationListener {
                 if (currentSteps >= 0) updateStepCount(currentSteps)
             }
             Sensor.TYPE_STEP_DETECTOR -> {
-                detectedSteps++
-                updateStepCount(detectedSteps)
+                val currentTime = System.currentTimeMillis()
+                if (currentTime - lastStepTime > 500) { // 500ms threshold
+                    detectedSteps++
+                    lastStepTime = currentTime
+                    updateStepCount(detectedSteps)
+                }
             }
             Sensor.TYPE_ACCELEROMETER -> {
+                val filteredValues = lowPass(event.values.clone(), null)
                 val acceleration = sqrt(
-                    event.values[0] * event.values[0] +
-                            event.values[1] * event.values[1] +
-                            event.values[2] * event.values[2]
+                    filteredValues[0] * filteredValues[0] +
+                            filteredValues[1] * filteredValues[1] +
+                            filteredValues[2] * filteredValues[2]
                 )
                 if (acceleration > 12) {
-                    detectedSteps++
-                    updateStepCount(detectedSteps)
+                    val currentTime = System.currentTimeMillis()
+                    if (currentTime - lastStepTime > 500) { // 500ms threshold
+                        detectedSteps++
+                        lastStepTime = currentTime
+                        updateStepCount(detectedSteps)
+                    }
                 }
             }
             Sensor.TYPE_GYROSCOPE -> {
@@ -149,8 +170,6 @@ class Progress : AppCompatActivity(), SensorEventListener, LocationListener {
     }
 
     override fun onProviderEnabled(provider: String) {}
-
     override fun onProviderDisabled(provider: String) {}
-
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
 }

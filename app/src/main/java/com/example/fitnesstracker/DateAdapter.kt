@@ -15,6 +15,8 @@ import java.util.*
 class DateAdapter(private val dates: List<String>, private val listener: OnDateClickListener) :
     RecyclerView.Adapter<DateAdapter.DateViewHolder>() {
 
+    private var selectedPosition = -1
+
     interface OnDateClickListener {
         fun onDateClick(date: String)
     }
@@ -28,14 +30,17 @@ class DateAdapter(private val dates: List<String>, private val listener: OnDateC
         val date = dates[position]
         holder.bind(date)
 
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val sdf = SimpleDateFormat("dd\nMMM", Locale.getDefault())
         val currentDate = sdf.format(Date())
 
         val context = holder.dateTextView.context
         val drawable: Drawable? = ContextCompat.getDrawable(context, R.drawable.date_background)
 
-        if (date == currentDate) {
+        if (position == selectedPosition) {
             drawable?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context, R.color.yellow), PorterDuff.Mode.SRC_IN)
+        } else if (date == currentDate && selectedPosition == -1) {
+            drawable?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context, R.color.yellow), PorterDuff.Mode.SRC_IN)
+            selectedPosition = position // Set the initial selected position to today's date
         } else {
             drawable?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context, R.color.gray), PorterDuff.Mode.SRC_IN)
         }
@@ -50,7 +55,11 @@ class DateAdapter(private val dates: List<String>, private val listener: OnDateC
 
         fun bind(date: String) {
             dateTextView.text = date
-            itemView.setOnClickListener { listener.onDateClick(date) }
+            itemView.setOnClickListener {
+                listener.onDateClick(date)
+                selectedPosition = adapterPosition
+                notifyDataSetChanged()
+            }
         }
     }
 }
