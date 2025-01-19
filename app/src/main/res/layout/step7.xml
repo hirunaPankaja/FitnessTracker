@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#373636"
-    tools:context=".step2">
+    tools:context=".Step7">
 
     <!-- Back Arrow -->
     <ImageView
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:gravity="center"
-        android:text="STEP 2 of 24"
+        android:text="STEP 7 of 24"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/backArrow"
@@ -37,13 +37,13 @@
     <!-- Progress Bar -->
     <View
         android:id="@+id/progressBar"
-        android:layout_width="84.44dp"
-        android:layout_height="4dp"
-        android:layout_marginTop="8dp"
-        android:background="#3B82F6"
-        app:layout_constraintTop_toBottomOf="@id/stepIndicator"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_width="294.67dp"
+    android:layout_height="4dp"
+    android:layout_marginTop="8dp"
+    android:background="#3B82F6"
+    app:layout_constraintTop_toBottomOf="@id/stepIndicator"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Gender Options -->
     <RadioGroup
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Which gender do you associate you with?"
+            android:text="Set Your Goal"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -73,10 +73,10 @@
             android:layout_marginTop="15dp"
             android:background="#454545"
             android:button="@null"
-            android:drawableEnd="@drawable/male_icon"
+            android:drawableEnd="@drawable/loose_weight"
             android:drawablePadding="8dp"
             android:radius="20dp"
-            android:text="     Male"
+            android:text="     Loose Weight"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
@@ -87,26 +87,13 @@
             android:layout_marginTop="10dp"
             android:background="#454545"
             android:button="@null"
-            android:drawableEnd="@drawable/female_icon"
+            android:drawableEnd="@drawable/gain_muscles"
             android:drawablePadding="8dp"
             android:radius="20dp"
-            android:text="    Female"
+            android:text="    Gain Muscles"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
-        <RadioButton
-            android:id="@+id/nonBinaryOption"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="#454545"
-            android:button="@null"
-            android:drawableEnd="@drawable/non_binary_icon"
-            android:drawablePadding="8dp"
-            android:radius="20dp"
-            android:text="    Non-binary"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
     </RadioGroup>
 
     <!-- Continue Button -->
@@ -123,4 +110,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

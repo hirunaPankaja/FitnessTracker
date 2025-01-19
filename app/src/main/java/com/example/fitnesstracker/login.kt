@@ -1,6 +1,8 @@
 package com.example.fitnesstracker
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -33,12 +35,17 @@ class login : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String) {
+        Log.d("LoginActivity", "Attempting to login with email: $email and password: $password")
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    val intent = Intent(this, MainActivity1::class.java)
+                    startActivity(intent)
+                    finish()
                     Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "Authentication Failed", Toast.LENGTH_SHORT).show()
+                    Log.e("LoginActivity", "Authentication failed: ${task.exception?.message}")
                 }
             }
     }

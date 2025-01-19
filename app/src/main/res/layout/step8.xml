@@ -24,21 +24,13 @@
             />
 
         <!-- Step Indicator -->
-        <TextView
-            android:id="@+id/stepIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="STEP 8 OF 24"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif-medium"/>
+
 
     </RelativeLayout>
 
     <!-- Progress Bar -->
     <View
-        android:layout_width="127dp"
+        android:layout_width="336.44dp"
         android:layout_height="2dp"
         android:layout_marginTop="8dp"
         android:background="#3B82F6"/>
