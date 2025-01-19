@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fitnesstracker.R
 import com.google.firebase.auth.FirebaseAuth
 
 class login : AppCompatActivity() {
