@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DateAdapter(private val dates: List<String>, private val listener: OnDateClickListener) :
+class  DateAdapter(private val dates: List<String>, private val listener: OnDateClickListener) :
     RecyclerView.Adapter<DateAdapter.DateViewHolder>() {
 
     private var selectedPosition = -1

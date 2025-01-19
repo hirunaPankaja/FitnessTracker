@@ -38,7 +38,7 @@
 
     <!-- Progress Bar -->
     <View
-        android:layout_width="99dp"
+        android:layout_width="380.00dp"
         android:layout_height="4dp"
         android:layout_marginTop="6dp"
         android:background="#3B82F6"/>

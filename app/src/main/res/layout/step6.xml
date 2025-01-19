@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,7 +8,7 @@
     android:padding="16dp">
 
     <!-- Top Bar -->
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp">
@@ -18,30 +18,32 @@
             android:id="@+id/backArrow"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_alignParentStart="true"
             android:src="@drawable/ic_back_arrow"
             android:contentDescription="Back Arrow"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Step Indicator -->
         <TextView
             android:id="@+id/stepIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="STEP 16 OF 24"
+            android:text="STEP 2 of 24"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif-medium"/>
-
-    </RelativeLayout>
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/backArrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Progress Bar -->
     <View
-        android:layout_width="267dp"
-        android:layout_height="2dp"
+        android:id="@+id/progressBar"
+        android:layout_width="252.89dp"
+        android:layout_height="4dp"
         android:layout_marginTop="8dp"
-        android:background="#3B82F6"/>
+        android:background="#3B82F6" />
 
     <!-- Question -->
     <TextView
@@ -52,7 +54,7 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textAlignment="center"
-        android:fontFamily="sans-serif-black"/>
+        android:fontFamily="sans-serif-black" />
 
     <!-- Diet Options -->
     <LinearLayout
@@ -66,7 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:drawableEnd="@drawable/ic_vegetarian"
             android:background="#2E2D2D"
             android:orientation="horizontal"
             android:padding="12dp">
@@ -77,12 +78,11 @@
                 android:buttonTint="#FFFFFF" />
 
             <LinearLayout
-                android:layout_width="240dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingStart="12dp">
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -113,7 +113,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-
             android:background="#2E2D2D"
             android:orientation="horizontal"
             android:padding="12dp">
@@ -159,7 +158,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-
             android:background="#2E2D2D"
             android:orientation="horizontal"
             android:padding="12dp">
@@ -205,7 +203,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-
             android:background="#2E2D2D"
             android:orientation="horizontal"
             android:padding="12dp">
@@ -216,7 +213,7 @@
                 android:buttonTint="#FFFFFF" />
 
             <LinearLayout
-                android:layout_width="188dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
@@ -243,10 +240,10 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="154dp"
+        android:layout_marginTop="24dp"
         android:text="CONTINUE"
         android:textColor="#FFFFFF"
         android:backgroundTint="#3B82F6"
         android:fontFamily="sans-serif-medium"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 </LinearLayout>
