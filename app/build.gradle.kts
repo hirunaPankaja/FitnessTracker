@@ -47,7 +47,12 @@ buildFeatures {
 }
 
 dependencies {
-    implementation("com.mikhaellopez:circularprogressbar:3.1.0")
+    implementation(libs.circularprogressbar)
+
+        implementation (libs.android.mail)
+        implementation (libs.android.activation)
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

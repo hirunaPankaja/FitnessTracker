@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -27,13 +29,13 @@
             android:exported="false"
             android:label="@string/title_activity_map1" />
         <activity
-            android:name=".MapActivity"
+            android:name=".OTP_verification"
             android:exported="false" />
         <activity
             android:name=".User_Profile"
             android:exported="false" />
         <activity
-            android:name=".Workout"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
