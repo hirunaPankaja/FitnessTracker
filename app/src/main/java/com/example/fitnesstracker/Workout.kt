@@ -2,10 +2,13 @@ package com.example.fitnesstracker
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.CircularProgressIndicator
-import android.widget.TextView
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Workout : AppCompatActivity() {
 
@@ -18,34 +21,46 @@ class Workout : AppCompatActivity() {
     private lateinit var timerDisplay: TextView
     private lateinit var circularProgressIndicator: CircularProgressIndicator
 
+    // Firestore and UI elements
+    private lateinit var db: FirebaseFirestore
+    private lateinit var imageViewIllustration: ImageView
+    private lateinit var textViewTitle: TextView
+    private lateinit var textViewInstructions: TextView
+    private lateinit var textViewRepsSets: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.workout)
 
+        // Initialize UI elements
         startButton = findViewById(R.id.startButton)
         pauseButton = findViewById(R.id.pauseButton)
         resetButton = findViewById(R.id.resetButton)
         timerDisplay = findViewById(R.id.timerDisplay)
         circularProgressIndicator = findViewById(R.id.circularProgressIndicator)
+        imageViewIllustration = findViewById(R.id.imageViewIllustration)
+        textViewTitle = findViewById(R.id.textViewTitle)
+        textViewInstructions = findViewById(R.id.textViewInstructions)
+        textViewRepsSets = findViewById(R.id.textViewRepsSets)
 
-        startButton.setOnClickListener {
-            startTimer()
-        }
+        // Initialize Firebase Firestore
+        db = FirebaseFirestore.getInstance()
 
-        pauseButton.setOnClickListener {
-            pauseTimer()
-        }
+        // Button click listeners
+        startButton.setOnClickListener { startTimer() }
+        pauseButton.setOnClickListener { pauseTimer() }
+        resetButton.setOnClickListener { resetTimer() }
 
-        resetButton.setOnClickListener {
-            resetTimer()
-        }
-
+        // Set Circular Progress Indicator
         circularProgressIndicator.max = 100
         circularProgressIndicator.progress = 100
 
-
+        // Update timer text and progress
         updateTimerText()
         updateProgressIndicator()
+
+        // Fetch data from Firestore
+        fetchDataFromFirestore()
     }
 
     private fun startTimer() {
@@ -65,6 +80,9 @@ class Workout : AppCompatActivity() {
 
     private fun pauseTimer() {
         timer?.cancel()
+        // Update the UI to reflect the paused state
+        updateTimerText()
+        updateProgressIndicator()
     }
 
     private fun resetTimer() {
@@ -84,5 +102,32 @@ class Workout : AppCompatActivity() {
     private fun updateProgressIndicator() {
         val progress = (timeLeftInSeconds.toDouble() / maxTimeInSeconds * 100).toInt()
         circularProgressIndicator.progress = progress
+    }
+
+    private fun fetchDataFromFirestore() {
+        db.collection("workouts")
+            .document("pushup")
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val title = documentSnapshot.getString("title")
+                    val instructions = documentSnapshot.getString("instructions")
+                    val repsSets = documentSnapshot.getString("repsSets")
+
+                    textViewTitle.text = title
+                    textViewInstructions.text = instructions
+                    textViewRepsSets.text = repsSets
+
+                    // Log the retrieved data
+                    Log.d("Firestore", "Title: $title")
+                    Log.d("Firestore", "Instructions: $instructions")
+                    Log.d("Firestore", "Reps and Sets: $repsSets")
+                } else {
+                    Log.d("Firestore", "No such document")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firestore", "Error fetching data", e)
+            }
     }
 }
