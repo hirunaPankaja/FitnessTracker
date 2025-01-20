@@ -1,5 +1,9 @@
 [versions]
+activation = "1.1.1"
 agp = "8.7.3"
+androidMail = "1.6.0"
+circularprogressbar = "3.1.0"
+javaxMail = "1.6.2"
 kotlin = "1.9.24"
 mapSecret = "2.0.1"
 coreKtx = "1.15.0"
@@ -19,7 +23,12 @@ googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
 
 [libraries]
+activation = { module = "javax.activation:activation", version.ref = "activation" }
+android-activation = { module = "com.sun.mail:android-activation", version.ref = "androidMail" }
+android-mail = { module = "com.sun.mail:android-mail", version.ref = "androidMail" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+circularprogressbar = { module = "com.mikhaellopez:circularprogressbar", version.ref = "circularprogressbar" }
+javax-mail = { module = "com.sun.mail:javax.mail", version.ref = "javaxMail" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
