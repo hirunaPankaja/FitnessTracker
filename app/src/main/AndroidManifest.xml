@@ -33,7 +33,7 @@
             android:name=".User_Profile"
             android:exported="false" />
         <activity
-            android:name=".MainActivity1"
+            android:name=".Workout"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

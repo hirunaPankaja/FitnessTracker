@@ -1,4 +1,5 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,156 +7,149 @@
     android:background="@color/black"
     tools:context=".Workout">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Overlay to dim background image -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:alpha="0.6"
+        tools:ignore="MissingConstraints" />
 
+    <!-- Illustration Image -->
+    <ImageView
+        android:id="@+id/imageViewIllustration"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pushup"
+        android:contentDescription="Illustration of workout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#FF0000"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintHorizontal_bias="0.5" />
 
-        <!-- Illustration Image -->
-        <ImageView
-            android:id="@+id/imageViewIllustration"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:contentDescription="Illustration of workout"
-            android:scaleType="centerCrop"
-            android:src="@drawable/pushup"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!-- Workout Title -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Push ups"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIllustration"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintHorizontal_bias="0.5" />
 
-        <!-- Workout Title -->
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="Push Ups"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewIllustration" />
+    <!-- Instructions -->
+    <TextView
+        android:id="@+id/textViewInstructions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="1. Lie on your back with knees bent and feet flat on the ground, hands behind your head.\n2. Engage your core by pulling your belly button toward your spine.\n3. Lift your upper body towards your knees using your abdominal muscles, keeping your lower back on the floor.\n4. Pause at the top of the movement for 1-2 seconds, engaging your abs.\n5. Slowly lower your upper body back to the starting position while maintaining control."
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintHorizontal_bias="0.5" />
 
-        <!-- Instructions -->
-        <TextView
-            android:id="@+id/textViewInstructions"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="1. Lie on your back with knees bent and feet flat on the ground, hands behind your head.\n2. Engage your core by pulling your belly button toward your spine.\n3. Lift your upper body towards your knees using your abdominal muscles, keeping your lower back on the floor.\n4. Pause at the top of the movement for 1-2 seconds, engaging your abs.\n5. Slowly lower your upper body back to the starting position while maintaining control."
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+    <!-- Reps and Sets -->
+    <TextView
+        android:id="@+id/textViewRepsSets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 8 reps • 3 sets"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInstructions"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintHorizontal_bias="0.5" />
 
-        <!-- Reps and Sets -->
-        <TextView
-            android:id="@+id/textViewRepsSets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="8 reps • 3 sets"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewInstructions" />
+    <!-- Circular Timer -->
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/circularProgressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="0"
+        app:trackThickness="8dp"
+        app:indicatorSize="128dp"
+        app:indicatorColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRepsSets"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.5" />
 
-        <!-- Circular Timer -->
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/circularProgressIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="0"
-            app:indicatorColor="@color/white"
-            app:indicatorSize="128dp"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewRepsSets"
-            app:trackThickness="8dp" />
+    <!-- Timer Display -->
+    <TextView
+        android:id="@+id/timerDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:30"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toTopOf="@+id/circularProgressIndicator"
+        app:layout_constraintBottom_toBottomOf="@+id/circularProgressIndicator"
+        app:layout_constraintLeft_toLeftOf="@+id/circularProgressIndicator"
+        app:layout_constraintRight_toRightOf="@+id/circularProgressIndicator"
+        app:layout_constraintHorizontal_bias="0.5" />
 
-        <!-- Timer Display -->
-        <TextView
-            android:id="@+id/timerDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="00:30"
-            android:textColor="@color/white"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/circularProgressIndicator"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="@+id/circularProgressIndicator"
-            app:layout_constraintRight_toRightOf="@+id/circularProgressIndicator"
-            app:layout_constraintTop_toTopOf="@+id/circularProgressIndicator" />
+    <!-- Start Button -->
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/circularProgressIndicator"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="-11dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintHorizontal_bias="0.2" />
 
-        <!-- Start Button -->
+    <!-- Pause Button -->
+    <Button
+        android:id="@+id/pauseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-11dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="@color/white"
+        android:text="Pause"
+        android:textColor="@color/black"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circularProgressIndicator" />
 
-        <!-- Pause Button -->
-
-        <!-- Reset Button -->
-        <Button
-            android:id="@+id/startButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/white"
-            android:text="Start"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/pauseButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/circularProgressIndicator" />
-
-        <Button
-            android:id="@+id/pauseButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/white"
-            android:text="Pause"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/resetButton"
-            app:layout_constraintStart_toEndOf="@+id/startButton"
-            app:layout_constraintTop_toBottomOf="@+id/circularProgressIndicator" />
-
-        <Button
-            android:id="@+id/resetButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/red"
-            android:text="Reset"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/pauseButton"
-            app:layout_constraintTop_toBottomOf="@+id/circularProgressIndicator" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+    <!-- Reset Button -->
+    <Button
+        android:id="@+id/resetButton"
+        android:textStyle="bold"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="21dp"
+        android:backgroundTint="@color/red"
+        android:text="Reset"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInstructions" />
+</androidx.constraintlayout.widget.ConstraintLayout>
