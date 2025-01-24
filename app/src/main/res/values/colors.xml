@@ -44,6 +44,12 @@
     <color name="buttonPressed">#388E3C</color>
     <!--  Darker green for button press  -->
     <color name="light_blue">#ADD8E6</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="cardBackgroundColor">#2A2A2A</color>
+    <color name="primaryTextColor">#FFFFFF</color>
+    <color name="secondaryTextColor">#DDDDDD</color>
+    <color name="highlightColor">#6C63FF</color>
     <color name="red">#FF0000</color>
 
 

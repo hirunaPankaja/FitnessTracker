@@ -28,14 +28,12 @@
             android:name=".Map1"
             android:exported="false"
             android:label="@string/title_activity_map1" />
-        <activity
-            android:name=".OTP_verification"
-            android:exported="false" />
+
         <activity
             android:name=".User_Profile"
             android:exported="false" />
         <activity
-
+            android:name=".LowerBodyWorkoutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
