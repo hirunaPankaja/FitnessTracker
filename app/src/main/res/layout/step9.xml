@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#1F1F1F"
+    android:background="@color/background_primary"
     android:padding="16dp">
 
     <!-- Top Bar -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:layout_marginTop="30dp">
 
         <!-- Back Arrow -->
         <ImageView
@@ -38,10 +38,10 @@
 
     <!-- Progress Bar -->
     <View
-        android:layout_width="380.00dp"
+        android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_marginTop="6dp"
-        android:background="#3B82F6"/>
+        android:background="#3B82F6" />
 
     <!-- Question -->
     <TextView
@@ -52,58 +52,59 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textAlignment="center"
-        android:fontFamily="sans-serif-black"/>
+        android:fontFamily="sans-serif-black" />
 
-    <!-- Option Buttons -->
-    <LinearLayout
+    <!-- Options as Radio Buttons -->
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:orientation="vertical">
 
         <!-- Option 1 -->
-        <Button
+        <RadioButton
+            android:id="@+id/radioOption1"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="46dp"
+            android:layout_height="wrap_content"
             android:text="LESS THAN 1 HOUR"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#2E2E2E"
+            android:padding="8dp"
             android:fontFamily="sans-serif-medium"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <!-- Option 2 -->
-        <Button
+        <RadioButton
+            android:id="@+id/radioOption2"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
             android:text="1–2 HOURS"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#2E2E2E"
+            android:padding="8dp"
             android:fontFamily="sans-serif-medium"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <!-- Option 3 -->
-        <Button
+        <RadioButton
+            android:id="@+id/radioOption3"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:text="MORE THAN 2 HOURS"
-            android:layout_marginTop="8dp"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#2E2E2E"
+            android:padding="8dp"
             android:fontFamily="sans-serif-medium"
-            android:textSize="16sp"/>
-    </LinearLayout>
+            android:textSize="16sp" />
+    </RadioGroup>
 
     <!-- Continue Button -->
     <Button
+        android:id="@+id/continueButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="272dp"
+        android:layout_marginTop="32dp"
         android:text="CONTINUE"
         android:textColor="#FFFFFF"
         android:backgroundTint="#3B82F6"
         android:fontFamily="sans-serif-medium"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 </LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#1F1F1F"
+    android:background="@color/background_primary"
     android:padding="16dp">
 
     <!-- Top Bar -->
@@ -20,12 +20,7 @@
             android:layout_height="24dp"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_back_arrow"
-            android:contentDescription="Back Arrow"
-            />
-
-        <!-- Step Indicator -->
-
-
+            android:contentDescription="Back Arrow" />
     </RelativeLayout>
 
     <!-- Progress Bar -->
@@ -33,7 +28,7 @@
         android:layout_width="336.44dp"
         android:layout_height="2dp"
         android:layout_marginTop="8dp"
-        android:background="#3B82F6"/>
+        android:background="#3B82F6" />
 
     <!-- Question -->
     <TextView
@@ -44,165 +39,65 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textAlignment="center"
-        android:fontFamily="sans-serif-black"/>
+        android:fontFamily="sans-serif-black" />
 
-    <!-- Diet Options -->
-    <LinearLayout
+    <!-- RadioGroup for Options -->
+    <RadioGroup
+        android:id="@+id/fitnessLevelRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical">
 
-        <!-- Vegetarian Option -->
-        <LinearLayout
+        <!-- Beginner Option -->
+        <RadioButton
+            android:id="@+id/radioBeginner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
-            android:drawableEnd="@drawable/ic_vegetarian"
-            android:background="#2E2D2D"
-            android:orientation="horizontal"
-            android:padding="12dp">
+            android:buttonTint="#FFFFFF"
+            android:text="BEGINNER\nI'm new to fitness"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"
+            android:textSize="14sp"
+            android:gravity="start" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="BEGINNER"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:text="I'm new to fitness"
-                    android:textColor="#BDBDBD"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="43dp"
-                android:contentDescription="Vegetarian Icon"
-                android:src="@drawable/ic_beginner" />
-        </LinearLayout>
-
-        <!-- Vegan Option -->
-        <LinearLayout
+        <!-- Intermediate Option -->
+        <RadioButton
+            android:id="@+id/radioIntermediate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:buttonTint="#FFFFFF"
+            android:text="INTERMEDIATE\nI work out 2-3 times a week"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"
+            android:textSize="14sp"
+            android:gravity="start" />
 
-            android:background="#2E2D2D"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="INTERMEDIATE"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:text="I work out 2-3 times a week"
-                    android:textColor="#BDBDBD"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="43dp"
-                android:contentDescription="Vegan Icon"
-                android:src="@drawable/ic_intermediate" />
-        </LinearLayout>
-
-        <!-- Keto Option -->
-        <LinearLayout
+        <!-- Advanced Option -->
+        <RadioButton
+            android:id="@+id/radioAdvanced"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-
-            android:background="#2E2D2D"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="ADVANCED"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:text="I exercise regularly"
-                    android:textColor="#BDBDBD"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="43dp"
-                android:contentDescription="Keto Icon"
-                android:src="@drawable/ic_advanced" />
-        </LinearLayout>
-
-        <!-- Other Option -->
-    </LinearLayout>
+            android:buttonTint="#FFFFFF"
+            android:text="ADVANCED\nI exercise regularly"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="12dp"
+            android:padding="16dp"
+            android:textSize="14sp"
+            android:gravity="start" />
+    </RadioGroup>
 
     <!-- Continue Button -->
     <Button
+        android:id="@+id/continueButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="194dp"
+        android:layout_marginTop="32dp"
         android:text="CONTINUE"
         android:textColor="#FFFFFF"
         android:backgroundTint="#3B82F6"
         android:fontFamily="sans-serif-medium"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.fitnesstracker
+package com.example.fitnesstracker.utils
 
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fitnesstracker.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,12 +38,18 @@ class  DateAdapter(private val dates: List<String>, private val listener: OnDate
         val drawable: Drawable? = ContextCompat.getDrawable(context, R.drawable.date_background)
 
         if (position == selectedPosition) {
-            drawable?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context, R.color.yellow), PorterDuff.Mode.SRC_IN)
+            drawable?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context,
+                R.color.yellow
+            ), PorterDuff.Mode.SRC_IN)
         } else if (date == currentDate && selectedPosition == -1) {
-            drawable?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context, R.color.yellow), PorterDuff.Mode.SRC_IN)
+            drawable?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context,
+                R.color.yellow
+            ), PorterDuff.Mode.SRC_IN)
             selectedPosition = position // Set the initial selected position to today's date
         } else {
-            drawable?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context, R.color.gray), PorterDuff.Mode.SRC_IN)
+            drawable?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context,
+                R.color.gray
+            ), PorterDuff.Mode.SRC_IN)
         }
 
         holder.dateTextView.background = drawable

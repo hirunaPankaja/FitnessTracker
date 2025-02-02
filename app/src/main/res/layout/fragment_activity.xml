@@ -135,7 +135,6 @@
         android:orientation="horizontal"
         android:padding="18dp"
         android:layout_marginTop="18dp"
-        android:background="@drawable/food_progress_background"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/topPanel"
         app:layout_constraintStart_toStartOf="parent"

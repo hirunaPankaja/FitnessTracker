@@ -67,23 +67,6 @@
     ]
   },
   {
-    "featureType": "administrative.neighborhood",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
     "featureType": "poi",
     "elementType": "labels.text.fill",
     "stylers": [
@@ -125,15 +108,6 @@
     "stylers": [
       {
         "color": "#2c2c2c"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
       }
     ]
   },
@@ -197,15 +171,6 @@
     "stylers": [
       {
         "color": "#000000"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "off"
       }
     ]
   },

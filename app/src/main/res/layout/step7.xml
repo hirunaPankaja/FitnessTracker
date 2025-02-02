@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#373636"
-    tools:context=".Step7">
+    android:background="@color/background_primary"
+    tools:context=".registrationSteps.Step7">
 
     <!-- Back Arrow -->
     <ImageView
@@ -47,7 +47,7 @@
 
     <!-- Gender Options -->
     <RadioGroup
-        android:id="@+id/genderOptions"
+        android:id="@+id/gaolOption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="#454545"
+            android:background="@drawable/radio_button_unselected"
             android:button="@null"
             android:drawableEnd="@drawable/loose_weight"
             android:drawablePadding="8dp"
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="#454545"
+            android:background="@drawable/radio_button_unselected"
             android:button="@null"
             android:drawableEnd="@drawable/gain_muscles"
             android:drawablePadding="8dp"

@@ -8,8 +8,10 @@
     <color name="yellow">#FFCC00</color>
     <color name="darkgray">#6e6a6a</color>
 
+    <color name="popup_spinner">#454545</color>
+
     <!-- Background Colors -->
-    <color name="background_primary">#FF121212</color> <!-- Dark background -->
+    <color name="background_primary">#373636</color> <!-- Dark background -->
     <color name="background_secondary">#FF1E1E1E</color> <!-- Slightly lighter background -->
 
     <!-- Text Colors -->

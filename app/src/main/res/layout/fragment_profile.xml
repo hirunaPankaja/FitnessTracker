@@ -30,9 +30,10 @@
                 android:scaleType="centerCrop" />
 
             <TextView
+                android:id="@+id/nameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mr.Muckzz"
+                android:text=""
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -63,10 +64,11 @@
                     android:scaleType="centerInside" />
 
                 <TextView
+                    android:id="@+id/weightTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="60 KG"
-                    android:textColor="#00FF00"
+                    android:text=""
+                    android:textColor="@color/yellow"
                     android:textSize="16sp"
                     android:gravity="center" />
 
@@ -95,10 +97,11 @@
                     android:scaleType="centerInside" />
 
                 <TextView
+                    android:id="@+id/heightTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5.6 Ft"
-                    android:textColor="#00FF00"
+                    android:text=""
+                    android:textColor="@color/yellow"
                     android:textSize="16sp"
                     android:gravity="center" />
 
@@ -127,10 +130,11 @@
                     android:scaleType="centerInside" />
 
                 <TextView
+                    android:id="@+id/ageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25 Year"
-                    android:textColor="#00FF00"
+                    android:text=""
+                    android:textColor="@color/yellow"
                     android:textSize="16sp"
                     android:gravity="center" />
 

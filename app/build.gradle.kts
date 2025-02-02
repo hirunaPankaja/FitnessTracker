@@ -20,7 +20,7 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -28,9 +28,12 @@ android {
             )
         }
     }
-buildFeatures {
-    viewBinding = true
-}
+
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -40,19 +43,16 @@ buildFeatures {
         jvmTarget = "11"
     }
 
-    buildFeatures {
-        viewBinding = true
-        buildConfig = true
+    // Add the packagingOptions block to exclude the conflicting file
+    packagingOptions {
+        exclude("META-INF/versions/9/OSGI-INF/MANIFEST.MF")
     }
 }
 
 dependencies {
     implementation(libs.circularprogressbar)
-
-        implementation (libs.android.mail)
-        implementation (libs.android.activation)
-
-
+    implementation(libs.android.mail)
+    implementation(libs.android.activation)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -65,9 +65,18 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.database)
-    implementation(libs.firebase.storage)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.transportation.consumer)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.identity.jvm)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.play.services.maps.v1802)
+    implementation(libs.play.services.location.v1800)
+    implementation (libs.androidx.recyclerview.v121)
 }

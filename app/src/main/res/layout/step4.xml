@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Step4">
+    android:background="@color/background_primary"
+    tools:context=".registrationSteps.Step4">
 
     <!-- Back Arrow -->
     <ImageView

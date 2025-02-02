@@ -4,11 +4,14 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,18 +21,14 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
+import com.example.fitnesstracker.utils.DateAdapter
+import com.example.fitnesstracker.utils.DateUtils
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.gms.maps.model.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,6 +42,13 @@ class Activity : Fragment(), DateAdapter.OnDateClickListener, OnMapReadyCallback
     private var previousTotalSteps = 0f
     private lateinit var footStepsTextView: TextView
 
+    // Declare polyline options and polyline at the class level
+    private lateinit var polylineOptions: PolylineOptions
+    private lateinit var currentPolyline: Polyline
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -54,7 +60,6 @@ class Activity : Fragment(), DateAdapter.OnDateClickListener, OnMapReadyCallback
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_activity, container, false)
 
         val dateRecyclerView: RecyclerView = view.findViewById(R.id.dateRecyclerView)
@@ -99,6 +104,9 @@ class Activity : Fragment(), DateAdapter.OnDateClickListener, OnMapReadyCallback
         // Register the sensor listener
         sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_UI)
 
+        // Initialize location client
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
         return view
     }
 
@@ -106,34 +114,58 @@ class Activity : Fragment(), DateAdapter.OnDateClickListener, OnMapReadyCallback
         mMap = googleMap
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.map_style))
 
-        val sriLanka = LatLng(7.8731, 80.7718)
-        mMap.addMarker(MarkerOptions().position(sriLanka).title("Marker in Sri Lanka"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sriLanka, 10.0f))
+        polylineOptions = PolylineOptions().width(5f).color(Color.RED)
+        currentPolyline = mMap.addPolyline(polylineOptions)
 
-        // Additional logic to track the user's walking route
-        setupLocationUpdates()
+        // Enable My Location layer if permissions are granted
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mMap.isMyLocationEnabled = true
+            // Start location updates
+            setupLocationUpdates()
+        } else {
+            // Request location permissions
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        }
     }
 
     private fun setupLocationUpdates() {
-        // Initialize PolylineOptions and Polyline
-        val polylineOptions = PolylineOptions().width(5f).color(android.graphics.Color.RED)
-        val currentPolyline = mMap.addPolyline(polylineOptions)
-
-        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         val locationRequest = LocationRequest.create().apply {
             interval = 5000 // Update interval in milliseconds
             fastestInterval = 2000 // Fastest update interval in milliseconds
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            priority = Priority.PRIORITY_HIGH_ACCURACY
         }
 
-        val locationCallback = object : LocationCallback() {
+        locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 locationResult ?: return
                 for (location in locationResult.locations) {
                     val currentLatLng = LatLng(location.latitude, location.longitude)
-                    polylineOptions.add(currentLatLng)
-                    currentPolyline.points = polylineOptions.points
+                    // Add the new point to the polyline
+                    val points = currentPolyline.points
+                    points.add(currentLatLng)
+                    currentPolyline.points = points
+
+                    // Optionally, add a marker at the current location
+                    // mMap.addMarker(MarkerOptions().position(currentLatLng).title("You're here"))
+
+                    // Move the camera to the current location
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15.0f))
+
+                    Log.d("LocationUpdate", "Location: ${location.latitude}, ${location.longitude}")
                 }
             }
         }
@@ -141,24 +173,47 @@ class Activity : Fragment(), DateAdapter.OnDateClickListener, OnMapReadyCallback
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
-                1
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
             )
-            return
         }
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
-        mMap.isMyLocationEnabled = true
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                // Permissions granted, initialize map
+                if (ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    mMap.isMyLocationEnabled = true
+                    setupLocationUpdates()
+                }
+            } else {
+                // Permission denied - handle appropriately (e.g., show a message)
+            }
+        }
     }
 
     override fun onDateClick(date: String) {
         val dateInformation = retrieveDateInformation(date)
+        // Handle date click events here
     }
 
     private fun retrieveDateInformation(date: String): DateUtils {
@@ -185,18 +240,32 @@ class Activity : Fragment(), DateAdapter.OnDateClickListener, OnMapReadyCallback
 
     override fun onPause() {
         super.onPause()
+        // Unregister sensor listener
         sensorManager.unregisterListener(this)
+        // Remove location updates
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Re-register sensor listener
+        sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_UI)
+        // Re-request location updates if needed
+        if (::mMap.isInitialized && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            setupLocationUpdates()
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Activity.
-         */
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             Activity().apply {

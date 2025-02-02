@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#1F1F1F"
+    android:background="@color/background_primary"
     android:padding="16dp">
 
     <!-- Top Bar -->
@@ -20,8 +20,7 @@
             android:layout_height="24dp"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_back_arrow"
-            android:contentDescription="Back Arrow"
-            />
+            android:contentDescription="Back Arrow" />
 
         <!-- Step Indicator -->
         <TextView
@@ -32,8 +31,7 @@
             android:text="STEP 11 OF 24"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            android:fontFamily="sans-serif-medium"/>
-
+            android:fontFamily="sans-serif-medium" />
     </RelativeLayout>
 
     <!-- Progress Bar -->
@@ -41,7 +39,7 @@
         android:layout_width="147dp"
         android:layout_height="2dp"
         android:layout_marginTop="8dp"
-        android:background="#3B82F6"/>
+        android:background="#3B82F6" />
 
     <!-- Question -->
     <TextView
@@ -52,248 +50,104 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textAlignment="center"
-        android:fontFamily="sans-serif-black"/>
+        android:fontFamily="sans-serif-black" />
 
-    <!-- Diet Options -->
-    <LinearLayout
+    <!-- RadioGroup for Options -->
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical">
 
-        <!-- Vegetarian Option -->
-        <LinearLayout
+        <!-- Marriage or Relationship Option -->
+        <RadioButton
+            android:id="@+id/radioMarriage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:drawableEnd="@drawable/ic_vegetarian"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:text="Marriage or a Relationship"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
             android:background="#2E2D2D"
-            android:orientation="horizontal"
-            android:padding="12dp">
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="MARRIAGE OR A RELATIONSHIP"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:contentDescription="Vegetarian Icon"
-                android:src="@drawable/ic_heart" />
-        </LinearLayout>
-
-        <!-- Vegan Option -->
-        <LinearLayout
+        <!-- Busy Work or Family Life Option -->
+        <RadioButton
+            android:id="@+id/radioBusyWork"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:text="Busy Work or Family Life"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
             android:background="#2E2D2D"
-            android:orientation="horizontal"
-            android:padding="12dp">
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="BUSY WORK OR FAMILY LIFE"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:contentDescription="Vegan Icon"
-                android:src="@drawable/ic_setting" />
-        </LinearLayout>
-
-        <!-- Keto Option -->
-        <LinearLayout
+        <!-- Stress or Mental Health Option -->
+        <RadioButton
+            android:id="@+id/radioStress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:text="Stress or Mental Health"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
             android:background="#2E2D2D"
-            android:orientation="horizontal"
-            android:padding="12dp">
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="STRESS OR MENTAL HEALTH"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:contentDescription="Keto Icon"
-                android:src="@drawable/ic_thunder" />
-        </LinearLayout>
-
-        <LinearLayout
+        <!-- Health or Hormonal Issues Option -->
+        <RadioButton
+            android:id="@+id/radioHealth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:text="Health or Hormonal Issues"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
             android:background="#2E2D2D"
-            android:orientation="horizontal"
-            android:padding="12dp">
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="HEALTH OR HORMONAL ISSUES"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:contentDescription="Keto Icon"
-                android:src="@drawable/ic_health" />
-        </LinearLayout>
-
-        <!-- Other Option -->
-        <LinearLayout
+        <!-- Lack of Motivation Option -->
+        <RadioButton
+            android:id="@+id/radioMotivation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:text="Lack of Motivation"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
             android:background="#2E2D2D"
-            android:orientation="horizontal"
-            android:padding="12dp">
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="188dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="LACK OF MOTIVATION"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="30dp"
-                android:contentDescription="Other Icon"
-                android:src="@drawable/ic_chart" />
-        </LinearLayout>
-
-        <!-- Other Option -->
-        <LinearLayout
+        <!-- None of the Above Option -->
+        <RadioButton
+            android:id="@+id/radioNone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:text="None of the Above"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#FFFFFF"
             android:background="#2E2D2D"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="188dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="NON OF THE ABOVE"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp" />
+    </RadioGroup>
 
     <!-- Continue Button -->
     <Button
+        android:id="@+id/continueButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="14dp"

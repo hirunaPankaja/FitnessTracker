@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.FitnessTracker" parent="Base.Theme.FitnessTracker" />
+
 </resources>

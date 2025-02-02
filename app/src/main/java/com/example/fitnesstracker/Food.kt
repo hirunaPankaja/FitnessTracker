@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.fitnesstracker.database.DataManager
+import android.util.Log
 
-class Food : Fragment(), DateAdapter.OnDateClickListener {
+class Food : Fragment() {
+
+    private lateinit var dataManager: DataManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,37 +20,37 @@ class Food : Fragment(), DateAdapter.OnDateClickListener {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_food, container, false)
 
-        val dateRecyclerView: RecyclerView = view.findViewById(R.id.dateRecyclerView)
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        dateRecyclerView.layoutManager = linearLayoutManager
+        dataManager = DataManager(requireContext())
 
-        val calendar = Calendar.getInstance()
-        val month = calendar.get(Calendar.MONTH)
-        val year = calendar.get(Calendar.YEAR)
-        val dates = DateUtils().generateDates(month, year)
-        val adapter = DateAdapter(dates, this)
-        dateRecyclerView.adapter = adapter
-
-        // Scroll to and center today's date
-        val sdf = SimpleDateFormat("dd\nMMM", Locale.getDefault())
-        val currentDate = sdf.format(Date())
-        val todayPosition = dates.indexOf(currentDate)
-        if (todayPosition != -1) {
-            dateRecyclerView.post {
-                val offset = (dateRecyclerView.width / 2) - (view.findViewById<View>(R.id.dateTextView).width / 2)
-                linearLayoutManager.scrollToPositionWithOffset(todayPosition, offset)
-            }
-        }
+        loadUserData(view) // Load the user data and display metrics
 
         return view
     }
 
-    override fun onDateClick(date: String) {
-        val dateInformation = retrieveDateInformation(date)
+    private fun loadUserData(view: View) {
+        val userData = dataManager.getUserData()
+        userData?.let { user ->
+            val metrics = dataManager.calculateMetrics(user)
+            displayMetrics(view, metrics)
+        } ?: run {
+            Log.d("Food", "No user data found")
+        }
     }
 
-    private fun retrieveDateInformation(date: String): DateUtils {
-        return DateUtils()
+    private fun displayMetrics(view: View, metrics: Map<String, Any>) {
+        val bmi = metrics["BMI"] as Double
+        val waterIntake = metrics["Daily Water Intake"] as Int
+        val caloricNeeds = metrics["Daily Caloric Needs"] as Int
+        val nutrientNeeds = metrics["Nutrient Needs"] as Map<String, Int>
+        val sleepNeed = metrics["Sleep Need"] as Int
+
+        view.findViewById<TextView>(R.id.bmiTextView).text = getString(R.string.bmi_text, bmi)
+        view.findViewById<TextView>(R.id.waterIntakeTextView).text = getString(R.string.water_intake_text, waterIntake)
+        view.findViewById<TextView>(R.id.caloricNeedsTextView).text = getString(R.string.caloric_needs_text, caloricNeeds)
+        view.findViewById<TextView>(R.id.proteinTextView).text = getString(R.string.protein_text, nutrientNeeds["protein"])
+        view.findViewById<TextView>(R.id.fatTextView).text = getString(R.string.fat_text, nutrientNeeds["fat"])
+        view.findViewById<TextView>(R.id.carbsTextView).text = getString(R.string.carbs_text, nutrientNeeds["carbs"])
+        view.findViewById<TextView>(R.id.sleepNeedTextView).text = getString(R.string.sleep_need_text, sleepNeed)
     }
 
     companion object {
