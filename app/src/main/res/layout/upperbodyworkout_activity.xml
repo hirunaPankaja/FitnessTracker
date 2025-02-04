@@ -127,10 +127,11 @@
                         android:id="@+id/imgPushUps"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/pushups"
+                        android:src="@drawable/pushup"
                         android:contentDescription="Push-Ups Image"
                         android:layout_marginEnd="16dp"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:onClick="onCardClick"/>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -179,7 +180,7 @@
                         android:id="@+id/imgDips"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/dips"
+                        android:src="@drawable/pushup"
                         android:contentDescription="Dips Image"
                         android:layout_marginEnd="16dp"
                         android:layout_gravity="center_vertical" />
@@ -231,7 +232,7 @@
                         android:id="@+id/imgPlankToPushUp"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/plank_to_pushup"
+                        android:src="@drawable/pushup"
                         android:contentDescription="Plank to Push-Up Image"
                         android:layout_marginEnd="16dp"
                         android:layout_gravity="center_vertical" />
@@ -284,7 +285,7 @@
                         android:id="@+id/imgBicepCurls"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/bicep_curls"
+                        android:src="@drawable/pushup"
                         android:contentDescription="Bicep Curls Image"
                         android:layout_marginEnd="16dp"
                         android:layout_gravity="center_vertical" />

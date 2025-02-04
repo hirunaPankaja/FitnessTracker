@@ -25,6 +25,11 @@
             android:value="Map Key" />
 
         <activity
+            android:name=".Workout"
+            android:exported="false" />
+
+
+        <activity
             android:name=".Map1"
             android:exported="false"
             android:label="@string/title_activity_map1" />
@@ -33,7 +38,7 @@
             android:name=".User_Profile"
             android:exported="false" />
         <activity
-            android:name=".LowerBodyWorkoutActivity"
+            android:name=".UpperBodyWorkoutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

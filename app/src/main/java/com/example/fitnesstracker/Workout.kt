@@ -3,7 +3,6 @@ package com.example.fitnesstracker
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
@@ -21,9 +20,7 @@ class Workout : AppCompatActivity() {
     private lateinit var timerDisplay: TextView
     private lateinit var circularProgressIndicator: CircularProgressIndicator
 
-    // Firestore and UI elements
     private lateinit var db: FirebaseFirestore
-    private lateinit var imageViewIllustration: ImageView
     private lateinit var textViewTitle: TextView
     private lateinit var textViewInstructions: TextView
     private lateinit var textViewRepsSets: TextView
@@ -32,34 +29,27 @@ class Workout : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.workout)
 
-        // Initialize UI elements
         startButton = findViewById(R.id.startButton)
         pauseButton = findViewById(R.id.pauseButton)
         resetButton = findViewById(R.id.resetButton)
         timerDisplay = findViewById(R.id.timerDisplay)
         circularProgressIndicator = findViewById(R.id.circularProgressIndicator)
-        imageViewIllustration = findViewById(R.id.imageViewIllustration)
         textViewTitle = findViewById(R.id.textViewTitle)
         textViewInstructions = findViewById(R.id.textViewInstructions)
         textViewRepsSets = findViewById(R.id.textViewRepsSets)
 
-        // Initialize Firebase Firestore
         db = FirebaseFirestore.getInstance()
 
-        // Button click listeners
         startButton.setOnClickListener { startTimer() }
         pauseButton.setOnClickListener { pauseTimer() }
         resetButton.setOnClickListener { resetTimer() }
 
-        // Set Circular Progress Indicator
         circularProgressIndicator.max = 100
         circularProgressIndicator.progress = 100
 
-        // Update timer text and progress
         updateTimerText()
         updateProgressIndicator()
 
-        // Fetch data from Firestore
         fetchDataFromFirestore()
     }
 
@@ -80,7 +70,6 @@ class Workout : AppCompatActivity() {
 
     private fun pauseTimer() {
         timer?.cancel()
-        // Update the UI to reflect the paused state
         updateTimerText()
         updateProgressIndicator()
     }
@@ -105,25 +94,32 @@ class Workout : AppCompatActivity() {
     }
 
     private fun fetchDataFromFirestore() {
-        db.collection("workouts")
-            .document("pushup")
+        val exerciseName = intent.getStringExtra("exerciseName")
+        Log.d("Workout", "Received exerciseName: $exerciseName")
+
+        if (exerciseName == null) {
+            Log.e("Workout", "No exerciseName provided")
+            return
+        }
+
+        db.collection("exercises")
+            .document(exerciseName)
             .get()
             .addOnSuccessListener { documentSnapshot ->
                 if (documentSnapshot.exists()) {
-                    val title = documentSnapshot.getString("title")
+                    val title = documentSnapshot.getString("name")
                     val instructions = documentSnapshot.getString("instructions")
-                    val repsSets = documentSnapshot.getString("repsSets")
+                    val repsSets = documentSnapshot.getString("reps")
 
                     textViewTitle.text = title
                     textViewInstructions.text = instructions
                     textViewRepsSets.text = repsSets
 
-                    // Log the retrieved data
                     Log.d("Firestore", "Title: $title")
                     Log.d("Firestore", "Instructions: $instructions")
                     Log.d("Firestore", "Reps and Sets: $repsSets")
                 } else {
-                    Log.d("Firestore", "No such document")
+                    Log.e("Firestore", "No such document")
                 }
             }
             .addOnFailureListener { e ->
